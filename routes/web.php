@@ -27,8 +27,6 @@ Route::get('login',function(){
 })->name('login');
 
 
-Route::resource('category',CategoryController::class)->middleware(['auth']);
-Route::resource('expenditure',ExpenditureController::class)->middleware(['auth']);
 
 Route::get('logout',[UserController::class,'logout'])->name('logout');
 Route::post('change-password/{user}',[UserController::class,'changePassword'])->middleware(['auth'])->name('change.password');
@@ -42,4 +40,5 @@ Route::get('migrate',function(){
 
 });
 
-Route::get('expenditure-export',[ExpenditureController::class,'export'])->name('expenditure.export');
+
+//Route::get('expenditure-export',[ExpenditureController::class,'export'])->name('expenditure.export');
