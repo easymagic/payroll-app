@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -123,10 +124,82 @@ class User extends Authenticatable
         $this->password = Hash::make('admin');
         $this->name = 'Admin';
         $this->phone = '08029292929';
+        $this->status = 1;
         $this->save();
         return $this;
     }
 
 
+    function scopeAllUsers(Builder $builder){
+        return $builder;
+    }
+
+    function getStatusNameAttribute(){
+        if ($this->status == 1){
+            return 'Active';
+        }
+        return 'In-Active';
+    }
+
+
+    function activateUser(){
+        $this->status = 1;
+        $this->save();
+    }
+
+    function deactivateUser(){
+        $this->status = 0;
+        $this->save();
+    }
+
+    function scopeAccountExists(Builder $builder,$email){
+        return $builder->where('email',$email)->exists();
+    }
+
+
+
+    function createUser(){
+
+        if ($this->accountExists(request('email'))){
+            return [
+                'message'=>'An account with this email already exists!',
+                'error'=>true
+            ];
+        }
+
+        if (!request()->filled('grade_id')){
+            return [
+                'message'=>'Grade is required!',
+                'error'=>true
+            ];
+        }
+
+        $this->email = request('email');
+        $this->name = request('name');
+        $this->phone = request('phone');
+        $this->grade_id = request('grade_id');
+        $this->password = Hash::make('password123');
+
+        $this->save();
+
+        return [
+            'message'=>'User account created successfully.',
+            'error'=>false
+        ];
+    }
+
+    function updateUser(){
+//        $this->email = request('email');
+        $this->name = request('name');
+        $this->phone = request('phone');
+        $this->grade_id = request('grade_id');
+//        $this->password = Hash::make('password123');
+        $this->save();
+
+        return [
+            'message'=>'User account updated successfully.',
+            'error'=>false
+        ];
+    }
 
 }

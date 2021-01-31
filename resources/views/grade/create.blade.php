@@ -1,4 +1,4 @@
-<form action="{{ route('category.store') }}" method="post">
+<form action="{{ route('grade.store') }}" method="post">
 <!-- Modal -->
     @csrf
 <div id="create" class="modal fade" role="dialog">

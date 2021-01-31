@@ -33,9 +33,9 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{ number_format($totalExpenditureCost) }}</h3>
+                            <h3>${{ number_format($payrollTotal) }}</h3>
 
-                            <p>Total Expenditure</p>
+                            <p>Total Payroll Ran</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -49,9 +49,9 @@
                     <!-- small box -->
                     <div class="small-box bg-primary">
                         <div class="inner">
-                            <h3>{{ number_format($confirmedCost) }}</h3>
+                            <h3>$ {{ number_format($payrollRanThisMonth) }}</h3>
 
-                            <p>Confirmed Expenditure</p>
+                            <p>Payroll Ran This Month</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -59,24 +59,6 @@
                         <a href="" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-
-
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3> {{ number_format($pendingCost) }} </h3>
-
-                            <p>Pending Expenditure</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-bag"></i>
-                        </div>
-                        <a href="" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-
-
 
 
 

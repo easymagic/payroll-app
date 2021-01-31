@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expenditure;
+use App\Models\Payroll;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,13 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     //
+
+    function index(){
+
+        $list = User::allUsers()->get();
+
+        return view('user.index',compact(['list']));
+    }
 
     function userLogin(){
 
@@ -61,13 +69,22 @@ class UserController extends Controller
 
         $userCount = User::count();
 
-        $confirmedCost = Expenditure::confirmedExpenditure()->sum('cost');
-        $pendingCost = Expenditure::pendingExpenditure()->sum('cost');
+        $payrollRanThisMonth = Payroll::thisMonth()->sum('net_pay');
+        $payrollTotal = Payroll::total()->sum('net_pay');
 
-        $totalExpenditureCost = Expenditure::sum('cost');
 
-       return view('user.dashboard',compact(['userCount','confirmedCost','pendingCost','totalExpenditureCost']));
+       return view('user.dashboard',compact(['userCount','payrollRanThisMonth','payrollTotal']));
 
+    }
+
+    function store(){
+        $response = (new User)->createUser();
+        return redirect()->back()->with($response);
+    }
+
+    function update(User $user){
+        $response = $user->updateUser();
+        return redirect()->back()->with($response);
     }
 
 

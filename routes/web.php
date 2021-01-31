@@ -40,5 +40,9 @@ Route::get('migrate',function(){
 
 });
 
+Route::resource('user',UserController::class)->middleware(['auth']);
+Route::resource('grade',\App\Http\Controllers\GradeController::class)->middleware(['auth']);
+Route::resource('payroll_component',\App\Http\Controllers\PayrollComponentController::class)->middleware(['auth']);
+
 
 //Route::get('expenditure-export',[ExpenditureController::class,'export'])->name('expenditure.export');

@@ -1,7 +1,7 @@
 @extends('components.modal',[
  'action'=>route('user.store'),
  'modal_id'=>'create',
- 'modal_header'=>'Add ' . ucfirst($type)
+ 'modal_header'=>'Add '
 ])
 
 @section('modal-body')
@@ -38,25 +38,9 @@
         <div class="col-md-12">
             <input name="address" value="{{ old('address') }}" type="text" class="form-control" placeholder="Address"  />
         </div>
-        <input type="hidden" name="type" value="{{ $type }}" />
 
 
-        @if ($type == 'dispatcher')
 
-            <div class="col-md-12">
-                <label for="">Select Ride</label>
-            </div>
-            <div class="col-md-12">
-                <select name="ride_id" id="" class="form-control">
-                    <option value="">Select</option>
-                    @foreach ($rides as $ride)
-                        <option value="{{ $ride->id }}">{{ $ride->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-
-        @endif
 
         <div class="col-md-12">
             <label for="">New Password</label>
@@ -86,5 +70,5 @@
 @overwrite
 
 @section('modal-footer')
-    <input type="submit" value="Add {{ ucfirst($type) }}" class="btn btn-sm btn-success" />
+    <input type="submit" value="Add" class="btn btn-sm btn-success" />
 @overwrite

@@ -3,11 +3,11 @@
 @section('content')
 
 
-    @include('category.create')
+    @include('grade.create')
 
     @foreach ($list as $item)
 
-        @include('category.edit')
+        @include('grade.edit')
 
     @endforeach
 
@@ -50,7 +50,7 @@
 
                         <a href="#" data-toggle="modal" data-target="#edit{{ $item->id }}" class="btn btn-sm btn-warning">Edit</a>
 
-                        <form style="display: inline-block;" onsubmit="return confirm('Do you want to remove this record?');" action="{{ route('category.destroy',[$item->id]) }}" method="post">
+                        <form style="display: inline-block;" onsubmit="return confirm('Do you want to remove this record?');" action="{{ route('grade.destroy',[$item->id]) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-sm btn-danger">Remove</button>

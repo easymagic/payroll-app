@@ -1,4 +1,4 @@
-<form action="{{ route('category.update',[$item->id]) }}" method="post">
+<form action="{{ route('grade.update',[$item->id]) }}" method="post">
     <!-- Modal -->
     @csrf
     @method('PUT')

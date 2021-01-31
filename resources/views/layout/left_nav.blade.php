@@ -38,28 +38,44 @@
 
 
                 <li class="nav-item">
-                    <a href="{{ route('category.index') }}" class="nav-link">
+                    <a href="{{ route('user.index') }}" class="nav-link">
                         <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
-                            Category
+                            Users
                         </p>
                     </a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a href="{{ route('expenditure.index') }}" class="nav-link">
+                    <a href="" class="nav-link">
                         <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
-                           Log Expenditure
+                            Grades
+                        </p>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon far fa-calendar-alt"></i>
+                        <p>
+                            Payroll
                         </p>
                     </a>
                 </li>
 
 
 
-
-
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon far fa-calendar-alt"></i>
+                        <p>
+                            Allowances / Deductions
+                        </p>
+                    </a>
+                </li>
 
 
 

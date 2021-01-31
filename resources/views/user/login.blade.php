@@ -1,6 +1,6 @@
 @extends('layout.plain')
 @section('title')
-    Expenditure Management Login
+    HR Management Login
 @endsection
 @section('content')
 
@@ -8,7 +8,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a style="font-size: 20px;" href="" class="h1"><b>Expenditure Management</b>&nbsp;Login</a>
+                <a style="font-size: 20px;" href="" class="h1"><b>HR Management</b>&nbsp;Login</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>

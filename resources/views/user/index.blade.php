@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layout.admin')
 @section('content')
 
 
@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ ucfirst($type) }}s</h1>
+                    <h1 class="m-0">Users</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -38,31 +38,23 @@
 
 
                 <div class="col-md-12" align="right" style="margin-bottom: 11px;">
-                    <a href="#" data-toggle="modal" data-target="#create" class="btn btn-sm btn-success">+ {{ ucfirst($type) }}</a>
+                    <a href="#" data-toggle="modal" data-target="#create" class="btn btn-sm btn-success">+ User</a>
                 </div>
 
                 <div class="col-md-12">
                     <table class="table-striped table">
                         <tr>
                             <th>
-                                Passport
+                                E-mail
                             </th>
-                            @if ($type == 'dispatcher')
-                               <th>
-                                   Ride
-                               </th>
-                            @endif
                             <th>
                                 Name
-                            </th>
-                            <th>
-                                E-mail
                             </th>
                             <th>
                                 Phone
                             </th>
                             <th>
-                                Address
+                                Grade
                             </th>
                             <th>
                                 Status
@@ -76,19 +68,6 @@
                         </tr>
                         @foreach ($list as $item)
                             <tr>
-
-                                <td>
-                                    @if (!empty($item->user_image))
-                                        <img src="{{ asset('uploads/' . $item->user_image) }}" alt="" style="width: 64px;" />
-                                    @endif
-
-                                </td>
-
-                                @if ($type == 'dispatcher')
-                                  <td>
-                                      {{ $item->ride->name }}
-                                  </td>
-                                @endif
 
                                 <td>
                                     {{ $item->name }}
@@ -123,11 +102,7 @@
                         @endforeach
                     </table>
                 </div>
-
-                <div>
-                    {{ $list->links() }}
-                </div>
-
+                
 
 
             </div>
