@@ -40,6 +40,15 @@ class GradeController extends Controller
     public function store(Request $request)
     {
         //
+
+        $response = (new Grade)->newGrade();
+
+        return redirect()->back()->with([
+            'message'=>'New Grade Added',
+            'error'=>false,
+            'data'=>$response
+        ]);
+
     }
 
     /**
@@ -74,6 +83,13 @@ class GradeController extends Controller
     public function update(Request $request, Grade $grade)
     {
         //
+        $response = $grade->updateGrade();
+
+        return  redirect()->back()->with([
+            'message'=>'Grade saved',
+            'error'=>false,
+            'data'=>$response
+        ]);
     }
 
     /**
@@ -85,5 +101,10 @@ class GradeController extends Controller
     public function destroy(Grade $grade)
     {
         //
+        $grade->delete();
+        return redirect()->back()->with([
+            'message'=>'Grade Removed',
+            'error'=>false
+        ]);
     }
 }
