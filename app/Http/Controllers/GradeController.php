@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grade;
+use App\Models\PayrollComponent;
 use Illuminate\Http\Request;
 
 class GradeController extends Controller
@@ -16,8 +17,9 @@ class GradeController extends Controller
     {
         //
         $list = Grade::all();
+        $components = PayrollComponent::all();
 
-        return view('grade.index',compact(['list']));
+        return view('grade.index',compact(['list','components']));
 
     }
 

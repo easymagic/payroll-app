@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\GradePayrollComponent;
+use App\Traits\RedirectHelper;
 use Illuminate\Http\Request;
 
 class GradePayrollComponentController extends Controller
 {
+    use RedirectHelper;
     /**
      * Display a listing of the resource.
      *
@@ -36,6 +38,13 @@ class GradePayrollComponentController extends Controller
     public function store(Request $request)
     {
         //
+        $response = (new GradePayrollComponent)->newGradePayrollComponent();
+
+        return $this->respondBack([
+            'message'=>'Payroll component added.',
+            'error'=>false,
+            'data'=>$response
+        ]);
     }
 
     /**
@@ -81,5 +90,10 @@ class GradePayrollComponentController extends Controller
     public function destroy(GradePayrollComponent $gradePayrollComponent)
     {
         //
+        $gradePayrollComponent->delete();
+        return $this->respondBack([
+            'message'=>'Grade component removed',
+            'error'=>false
+        ]);
     }
 }

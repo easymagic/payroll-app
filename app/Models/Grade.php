@@ -12,6 +12,11 @@ class Grade extends Model
     use RequestGrab;
 
 
+    function payroll_components(){
+        return $this->hasMany(GradePayrollComponent::class,'grade_id');
+    }
+
+
     function newGrade(){
 
         $this->take('name');

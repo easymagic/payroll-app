@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenditureController;
+use App\Http\Controllers\GradePayrollComponentController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,6 @@ Route::get('migrate',function(){
 Route::resource('user',UserController::class)->middleware(['auth']);
 Route::resource('grade',\App\Http\Controllers\GradeController::class)->middleware(['auth']);
 Route::resource('payroll_component',\App\Http\Controllers\PayrollComponentController::class)->middleware(['auth']);
-
+Route::resource('grade_payroll_component',GradePayrollComponentController::class)->middleware(['auth']);
 
 //Route::get('expenditure-export',[ExpenditureController::class,'export'])->name('expenditure.export');

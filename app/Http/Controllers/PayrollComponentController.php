@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\PayrollComponent;
+use App\Traits\RedirectHelper;
 use Illuminate\Http\Request;
 
 class PayrollComponentController extends Controller
 {
+    use RedirectHelper;
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +17,10 @@ class PayrollComponentController extends Controller
     public function index()
     {
         //
+        $list = PayrollComponent::all();
+
+        return view('payroll_component.index',compact(['list']));
+
     }
 
     /**
@@ -36,6 +42,14 @@ class PayrollComponentController extends Controller
     public function store(Request $request)
     {
         //
+        $data = (new PayrollComponent)->newPayrollComponent();
+
+        return $this->respondBack([
+            'message'=>'New payroll component added.',
+            'error'=>false,
+            'data'=>$data
+        ]);
+
     }
 
     /**
@@ -70,6 +84,14 @@ class PayrollComponentController extends Controller
     public function update(Request $request, PayrollComponent $payrollComponent)
     {
         //
+        $data = $payrollComponent->updatePayrollComponent();
+
+        return $this->respondBack([
+            'message'=>'Payroll component saved.',
+            'error'=>false,
+            'data'=>$data
+        ]);
+
     }
 
     /**
@@ -81,5 +103,10 @@ class PayrollComponentController extends Controller
     public function destroy(PayrollComponent $payrollComponent)
     {
         //
+        $payrollComponent->delete();
+        return $this->respondBack([
+            'message'=>'Payroll component removed',
+            'error'=>false
+        ]);
     }
 }
