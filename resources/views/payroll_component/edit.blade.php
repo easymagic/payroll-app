@@ -30,11 +30,23 @@
                         </select>
                     </div>
 
+
+                    <div class="col-md-12">
+                        <label for="">Value Type</label>
+                    </div>
+                    <div class="col-md-12">
+                        <select name="value_type" class="form-control" id="">
+                            <option {{ $selected($item->type == 'amount') }} value="amount">Amount</option>
+                            <option {{ $selected($item->type == 'percentage') }} value="percentage">Percentage</option>
+                        </select>
+                    </div>
+
+
                     <div class="col-md-12">
                         <label for="">Value</label>
                     </div>
                     <div class="col-md-12">
-                        <input class="form-control" value="{{ $item->value_type }}"  type="text" name="value_type" placeholder="Value" />
+                        <input class="form-control" value="{{ $item->value }}"  type="text" name="value" placeholder="Value" />
                     </div>
 
                 </div>

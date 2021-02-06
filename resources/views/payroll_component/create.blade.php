@@ -30,10 +30,21 @@
                 </div>
 
                 <div class="col-md-12">
+                    <label for="">Type</label>
+                </div>
+                <div class="col-md-12">
+                    <select name="value_type" class="form-control" id="">
+                        <option value="amount">Amount</option>
+                        <option value="percentage">Percentage</option>
+                    </select>
+                </div>
+
+
+                <div class="col-md-12">
                     <label for="">Value</label>
                 </div>
                 <div class="col-md-12">
-                    <input class="form-control" type="text" name="value_type" placeholder="Value" />
+                    <input class="form-control" type="text" name="value" placeholder="Value" />
                 </div>
 
             </div>

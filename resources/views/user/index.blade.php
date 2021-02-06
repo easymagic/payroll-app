@@ -79,9 +79,8 @@
                                     {{ $item->phone }}
                                 </td>
                                 <td>
-                                    {{ $item->address }}
+                                    {{ $item->grade->name }}
                                 </td>
-
                                 <td>
                                     {{ $item->statusName }}
                                 </td>

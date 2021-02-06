@@ -42,6 +42,17 @@
             <input name="address" type="text" class="form-control" placeholder="Address" value="{{ $item->address }}"  />
         </div>
 
+        <div class="col-md-12">
+            <label for="">Grade</label>
+        </div>
+        <div class="col-md-12">
+            <select name="grade_id" class="form-control" id="">
+                <option value="">--Select--</option>
+                @foreach ($grades as $grade)
+                    <option {{ $selected( $item->grade_id == $grade->id ) }} value="{{ $grade->id }}">{{ $grade->name }}</option>
+                @endforeach
+            </select>
+        </div>
 
 
 

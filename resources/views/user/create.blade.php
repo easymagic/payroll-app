@@ -32,6 +32,7 @@
         <div class="col-md-12">
             <input name="phone" type="text" class="form-control" value="{{ old('phone') }}" placeholder="Phone"  />
         </div>
+
         <div class="col-md-12">
             <label for="">Address</label>
         </div>
@@ -39,6 +40,19 @@
             <input name="address" value="{{ old('address') }}" type="text" class="form-control" placeholder="Address"  />
         </div>
 
+
+
+        <div class="col-md-12">
+            <label for="">Grade</label>
+        </div>
+        <div class="col-md-12">
+            <select name="grade_id" class="form-control" id="">
+                <option value="">--Select--</option>
+                @foreach ($grades as $grade)
+                    <option value="{{ $grade->id }}">{{ $grade->name }}</option>
+                @endforeach
+            </select>
+        </div>
 
 
 

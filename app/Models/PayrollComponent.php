@@ -20,6 +20,7 @@ class PayrollComponent extends Model
        $this->take('name');
        $this->take('type');
        $this->take('value_type');
+       $this->take('value');
 
        $this->save();
 
@@ -31,6 +32,7 @@ class PayrollComponent extends Model
         $this->take('name');
         $this->take('type');
         $this->take('value_type');
+        $this->take('value');
 
         $this->save();
 

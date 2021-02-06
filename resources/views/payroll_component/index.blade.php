@@ -28,6 +28,9 @@
                     Type
                 </th>
                 <th>
+                    Value-Type
+                </th>
+                <th>
                     Value
                 </th>
                 <th>
@@ -53,6 +56,10 @@
 
                     <td>
                         {{ $item->value_type }}
+                    </td>
+
+                    <td>
+                        {{ $item->value }}
                     </td>
 
                     <td>

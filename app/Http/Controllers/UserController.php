@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expenditure;
+use App\Models\Grade;
 use App\Models\Payroll;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,8 +16,9 @@ class UserController extends Controller
     function index(){
 
         $list = User::allUsers()->get();
+        $grades = Grade::all();
 
-        return view('user.index',compact(['list']));
+        return view('user.index',compact(['list','grades']));
     }
 
     function userLogin(){

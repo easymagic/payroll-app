@@ -5,7 +5,7 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Linked Components</h4>
+                    <h4 class="modal-title">Linked Components ({{ $item->name }})</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -53,6 +53,12 @@
                                     Payroll Component
                                 </th>
                                 <th>
+                                    Type
+                                </th>
+                                <th>
+                                    Type-Value
+                                </th>
+                                <th>
                                     Value
                                 </th>
                                 <th>
@@ -73,8 +79,18 @@
                                         {{ $item->payroll_component->name }}
                                     </td>
 
+
                                     <td>
-                                        {{ $item->payroll_component->amount }}
+                                        {{ $item->payroll_component->type }}
+                                    </td>
+
+                                    <td>
+                                        {{ $item->payroll_component->value_type }}
+                                    </td>
+
+
+                                    <td>
+                                        {{ $item->payroll_component->value }}
                                     </td>
 
                                     <td>

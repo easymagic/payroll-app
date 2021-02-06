@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\RequestGrab;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    use RequestGrab;
 
     /**
      * The attributes that are mass assignable.
@@ -72,6 +74,8 @@ class User extends Authenticatable
 
       $this->name = request('name');
       $this->phone = request('phone');
+
+      $this->take('grade_id');
 
       $this->save();
 
@@ -200,6 +204,10 @@ class User extends Authenticatable
             'message'=>'User account updated successfully.',
             'error'=>false
         ];
+    }
+
+    function grade(){
+        return $this->belongsTo(Grade::class,'grade_id');
     }
 
 }
