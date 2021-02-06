@@ -7,7 +7,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add Category</h4>
+                <h4 class="modal-title">Add Grade</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -16,7 +16,15 @@
                     <label for="">Name</label>
                 </div>
                 <div class="col-md-12">
-                    <input class="form-control" type="text" name="name" placeholder="Category Name" />
+                    <input class="form-control" type="text" name="name" placeholder="Grade Name" />
+                </div>
+
+
+                <div class="col-md-12">
+                    <label for="">Amount</label>
+                </div>
+                <div class="col-md-12">
+                    <input class="form-control" type="text" name="amount" placeholder="Grade Amount" />
                 </div>
 
 

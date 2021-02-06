@@ -15,6 +15,10 @@ class GradeController extends Controller
     public function index()
     {
         //
+        $list = Grade::all();
+
+        return view('grade.index',compact(['list']));
+
     }
 
     /**

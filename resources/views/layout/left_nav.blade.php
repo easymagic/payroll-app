@@ -48,7 +48,7 @@
 
 
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('grade.index') }}" class="nav-link">
                         <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Grades
@@ -69,7 +69,7 @@
 
 
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('payroll_component.index') }}" class="nav-link">
                         <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Allowances / Deductions

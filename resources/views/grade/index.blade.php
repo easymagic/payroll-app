@@ -12,7 +12,7 @@
     @endforeach
 
     <div class="col-md-12" align="right" style="margin-bottom: 11px;margin-top: 11px;">
-        <a data-toggle="modal" data-target="#create" href="#" class="btn btn-sm btn-primary">+ Category</a>
+        <a data-toggle="modal" data-target="#create" href="#" class="btn btn-sm btn-primary">+ Grade</a>
     </div>
 
 
@@ -23,6 +23,9 @@
 
                 <th>
                     Name
+                </th>
+                <th>
+                    Amount
                 </th>
                 <th>
                     Created
@@ -40,6 +43,10 @@
 
                     <td>
                         {{ $item->name }}
+                    </td>
+
+                    <td>
+                        {{ $item->amount }}
                     </td>
 
                     <td>
