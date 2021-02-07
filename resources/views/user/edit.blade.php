@@ -55,6 +55,52 @@
         </div>
 
 
+        <div class="col-md-12" style="margin-top: 11px;">
+            <label for="">Payroll Breakdown</label>
+        </div>
+
+        <div class="col-md-12">
+
+            <table class="table">
+                <tr>
+                    <th>
+                        Component
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                </tr>
+
+                @foreach ($item->payrollDetail() as $payroll_detail)
+
+                    <tr>
+                        <td>
+                            {{ $payroll_detail->name }}
+                        </td>
+                        <td>
+                           {{ $payroll_detail->type }}
+                        </td>
+                        <td>
+                            {{ $payroll_detail->value }}
+                        </td>
+                    </tr>
+
+                @endforeach
+            </table>
+
+            <div class="col-md-12" style="text-align: right;">
+                <b>
+                    Net-Pay : ${{ number_format($item->getSalary())  }}
+                </b>
+            </div>
+
+
+        </div>
+
+
 
 
 

@@ -207,7 +207,47 @@ class User extends Authenticatable
     }
 
     function grade(){
-        return $this->belongsTo(Grade::class,'grade_id');
+        return $this->belongsTo(Grade::class,'grade_id')->withDefault([
+            'name'=>'N/A',
+            'id'=>0,
+            'amount'=>0
+        ]);
+    }
+
+    function payrollDetail(){
+        //scopeGetPayrollBreakDownByUser
+        $userId = $this->id;
+        return PayrollComponent::getPayrollBreakDownByUser($userId)->get();
+    }
+
+    function getSalary(){
+       $basicSalary = $this->grade->amount;
+
+       $list = collect($this->payrollDetail());
+       $focus = $list->map(function($item){
+           return [
+               'amount'=>$item->value,
+               'type'=>$item->type
+           ];
+       });
+
+       $deductions = $focus->filter(function($item){
+           return ($item['type'] == 'deduction');
+       })->reduce(function($acc,$b){
+           return $acc + $b['amount'];
+       },0);
+
+        $allowances = $focus->filter(function($item){
+            return ($item['type'] == 'allowance');
+        })->reduce(function($acc,$b){
+            return $acc + $b['amount'];
+        },0);
+
+        return $basicSalary + $allowances - $deductions;
+
+//        dd($deductions,$allowances);
+
+
     }
 
 }
