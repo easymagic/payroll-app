@@ -34,15 +34,15 @@ class Payroll extends Model
         return $builder;
     }
 
-    static function isRan($data){
+    static function isRan($month_year,$user_id){
         $query = (new self)->newQuery();
-        $query = $query->where('month_year',$data['month_year']);
+        $query = $query->where('month_year',$month_year)->where('user_id',$user_id);
         return $query->exists();
     }
 
     function savePayroll($data){
 
-        if (!$this->isRan($data)){
+        if (!$this->isRan($data['month_year'],$data['user_id'])){
 
             $this->month_year = $data['month_year'];
             $this->allowances = $data['allowances'];
@@ -55,6 +55,7 @@ class Payroll extends Model
 
 
     }
+
 
 
 

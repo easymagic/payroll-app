@@ -18,7 +18,12 @@
     </div>
 
     <div class="col-md-12" align="right" style="margin-bottom: 11px;margin-top: 11px;">
-        <form action="{{ route('run.payroll') }}" method="post">
+
+        <input type="month" name="month_year" />
+        <button class="btn btn-xs btn-primary">Fetch Payroll</button>
+
+
+        <form action="{{ route('run.payroll') }}" method="post" style="display: inline-block;">
             @csrf
             <div class="col-md-12">
                 <input type="month" name="month_year" />
@@ -26,6 +31,9 @@
             </div>
         </form>
     </div>
+
+{{--    <div class="col-md-12">--}}
+{{--    </div>--}}
 
 
     <div class="col-md-12">
