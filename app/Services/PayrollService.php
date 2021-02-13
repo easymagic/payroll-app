@@ -4,16 +4,17 @@
 namespace App\Services;
 
 
+use App\Models\Payroll;
 use App\Models\User;
 use Carbon\Carbon;
 
 class PayrollService
 {
     private $users = [];
-    private $usersBasicSalary = [];
-    private $usersDeductions = [];
-    private $usersAllowances = [];
-    private $usersNetPay = [];
+//    private $usersBasicSalary = [];
+//    private $usersDeductions = [];
+//    private $usersAllowances = [];
+//    private $usersNetPay = [];
     private $numberOfDays = 0;
 
     function runPayroll(){
@@ -91,17 +92,28 @@ class PayrollService
 
     function computeUsersNetPay(){
 
+
         $this->users = $this->users->map(function($item){
             return [
-                'user'=>$item['user'],
+                'month_year'=>request('month_year'),
+                'user_id'=>$item['user']->id,
                 'basic_salary'=>$item['basic_salary'],
                 'deductions'=>$item['deductions'],
                 'allowances'=>$item['allowances'],
-                'net_pay'=>($item['basic_salary'] + $item['allowances'] - $item['deductions'])
+                'gross_pay'=>($item['basic_salary'] + $item['allowances']) * $this->numberOfDays,
+                'net_pay'=>($item['basic_salary'] + $item['allowances'] - $item['deductions']) * $this->numberOfDays
             ];
         });
 
-//        dd($this->users);
+        $this->users->each(function($item){
+
+            if (Payroll::isRan($item)){
+               throw new \Exception('Payroll already ran for the month ' . $item['month_year']);
+            }
+
+            (new Payroll)->savePayroll($item);
+
+        });
 
     }
 

@@ -34,6 +34,28 @@ class Payroll extends Model
         return $builder;
     }
 
+    static function isRan($data){
+        $query = (new self)->newQuery();
+        $query = $query->where('month_year',$data['month_year']);
+        return $query->exists();
+    }
+
+    function savePayroll($data){
+
+        if (!$this->isRan($data)){
+
+            $this->month_year = $data['month_year'];
+            $this->allowances = $data['allowances'];
+            $this->deductions = $data['deductions'];
+            $this->user_id = $data['user_id'];
+            $this->gross_pay = $data['gross_pay'];
+            $this->net_pay = $data['net_pay'];
+            $this->save();
+        }
+
+
+    }
+
 
 
 
