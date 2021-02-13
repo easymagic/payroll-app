@@ -19,8 +19,10 @@
 
     <div class="col-md-12" align="right" style="margin-bottom: 11px;margin-top: 11px;">
 
-        <input type="month" name="month_year" />
-        <button class="btn btn-xs btn-primary">Fetch Payroll</button>
+        <form method="get" style="display: inline-block">
+            <input type="month" name="month_year" />
+            <button class="btn btn-xs btn-primary">Fetch Payroll</button>
+        </form>
 
 
         <form action="{{ route('run.payroll') }}" method="post" style="display: inline-block;">
@@ -68,18 +70,18 @@
                 <tr>
 
                     <td>
-                        {{ $item->name }}
+                        {{ $item->employee->name }}
                     </td>
                     <td>
-                        {{ $item->type }}
-                    </td>
-
-                    <td>
-                        {{ $item->value_type }}
+                        {{ $item->net_pay }}
                     </td>
 
                     <td>
-                        {{ $item->value }}
+                        {{ $item->getMonthText() }}
+                    </td>
+
+                    <td>
+                        {{ $item->getYearText() }}
                     </td>
 
                     <td>
@@ -88,7 +90,7 @@
 
                     <td>
 
-                        <a href="#" data-toggle="modal" data-target="#edit{{ $item->id }}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="#" data-toggle="modal" data-target="#edit{{ $item->id }}" class="btn btn-sm btn-warning">Detail</a>
 
                     </td>
 
@@ -97,6 +99,12 @@
             @endforeach
 
         </table>
+
+        <div class="col-md-12">
+            <h4>
+                Total Net Pay For The Month: ${{ number_format($totalNetPay) }}
+            </h4>
+        </div>
     </div>
 
 

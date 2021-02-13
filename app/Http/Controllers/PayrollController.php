@@ -16,8 +16,18 @@ class PayrollController extends Controller
     public function index()
     {
         //
-        $list = [];
-        return view('payroll.index',compact(['list']));
+        $list = Payroll::fetch()->get();
+        $listFocus = collect($list);
+        $totalNetPay = $listFocus->map(function($item){
+            return [
+                'net_pay'=>$item->net_pay
+            ];
+        });
+        $totalNetPay = $totalNetPay->reduce(function($acc,$item){
+            return $acc + $item['net_pay'];
+        },0);
+
+        return view('payroll.index',compact(['list','totalNetPay']));
     }
 
     function runPayroll(PayrollService $payrollService){

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,12 +12,19 @@ class Payroll extends Model
     use HasFactory;
 
 
-    function fetch(){
+    static function fetch(){
 
         $query = (new self)->newQuery();
 
+        $query = $query->when(request()->filled('month_year'),function (Builder $builder){
 
+            return $builder->where('month_year', request('month_year'));
 
+        });
+
+        if (!request()->filled('month_year')){
+            $query = $query->where('month_year',date('Y-m'));
+        }
 
         return $query;
     }
@@ -54,6 +62,19 @@ class Payroll extends Model
         }
 
 
+    }
+
+    function getYearText(){
+        $carbon = Carbon::create($this->month_year);
+        return $carbon->year;
+    }
+    function getMonthText(){
+        $carbon = Carbon::create($this->month_year);
+        return $carbon->monthName;
+    }
+
+    function employee(){
+        return $this->belongsTo(User::class,'user_id');
     }
 
 
