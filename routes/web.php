@@ -46,4 +46,12 @@ Route::resource('grade',\App\Http\Controllers\GradeController::class)->middlewar
 Route::resource('payroll_component',\App\Http\Controllers\PayrollComponentController::class)->middleware(['auth']);
 Route::resource('grade_payroll_component',GradePayrollComponentController::class)->middleware(['auth']);
 
+Route::prefix('payroll')->group(function(){
+
+    Route::resource('hr',\App\Http\Controllers\PayrollController::class)->middleware(['auth']);
+
+    Route::post('run-payroll',[\App\Http\Controllers\PayrollController::class,'runPayroll'])->name('run.payroll')->middleware(['auth']);
+
+});
+
 //Route::get('expenditure-export',[ExpenditureController::class,'export'])->name('expenditure.export');

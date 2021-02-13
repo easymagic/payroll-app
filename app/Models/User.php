@@ -220,6 +220,48 @@ class User extends Authenticatable
         return PayrollComponent::getPayrollBreakDownByUser($userId)->get();
     }
 
+    function getDailyBasicSalary(){
+        return $this->grade->amount;
+    }
+
+    function getDailyDeductions(){
+        $list = collect($this->payrollDetail());
+        $focus = $list->map(function($item){
+            return [
+                'amount'=>$item->value,
+                'type'=>$item->type
+            ];
+        });
+
+        $deductions = $focus->filter(function($item){
+            return ($item['type'] == 'deduction');
+        })->reduce(function($acc,$b){
+            return $acc + $b['amount'];
+        },0);
+
+        return $deductions;
+
+    }
+
+    function getDailyAllowance(){
+        $list = collect($this->payrollDetail());
+        $focus = $list->map(function($item){
+            return [
+                'amount'=>$item->value,
+                'type'=>$item->type
+            ];
+        });
+
+        $allowances = $focus->filter(function($item){
+            return ($item['type'] == 'allowance');
+        })->reduce(function($acc,$b){
+            return $acc + $b['amount'];
+        },0);
+
+        return $allowances;
+
+    }
+
     function getSalary(){
        $basicSalary = $this->grade->amount;
 

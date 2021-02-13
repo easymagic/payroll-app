@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payroll;
+use App\Services\PayrollService;
 use Illuminate\Http\Request;
 
 class PayrollController extends Controller
@@ -15,6 +16,13 @@ class PayrollController extends Controller
     public function index()
     {
         //
+        $list = [];
+        return view('payroll.index',compact(['list']));
+    }
+
+    function runPayroll(PayrollService $payrollService){
+        $response = $payrollService->runPayroll();
+        return redirect()->back()->with($response);
     }
 
     /**

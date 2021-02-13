@@ -93,7 +93,7 @@
 
             <div class="col-md-12" style="text-align: right;">
                 <b>
-                    Net-Pay : ${{ number_format($item->getSalary())  }}
+                    Daily Net-Pay : ${{ number_format($item->getSalary())  }}
                 </b>
             </div>
 
