@@ -42,6 +42,8 @@
             <input name="address" type="text" class="form-control" placeholder="Address" value="{{ $item->address }}"  />
         </div>
 
+
+
         <div class="col-md-12">
             <label for="">Grade</label>
         </div>
@@ -53,6 +55,21 @@
                 @endforeach
             </select>
         </div>
+
+        <div class="col-md-12">
+            <label for="">New Password</label>
+        </div>
+        <div class="col-md-12">
+            <input name="new_password" type="password" class="form-control" placeholder="New Password"   />
+        </div>
+
+        <div class="col-md-12">
+            <label for="">Confirm Password</label>
+        </div>
+        <div class="col-md-12">
+            <input name="confirm_password" type="password" class="form-control" placeholder="Confirm Password"   />
+        </div>
+
 
 
         <div class="col-md-12" style="margin-top: 11px;">

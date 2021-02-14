@@ -13,7 +13,11 @@
 
     <div class="col-md-12">
         <h3>
-            Run Payroll
+            @if (Auth::user()->type == 'admin')
+              Run Payroll
+            @else
+              Payroll History
+            @endif
         </h3>
     </div>
 
@@ -25,6 +29,7 @@
         </form>
 
 
+        @if (Auth::user()->type == 'admin')
         <form action="{{ route('run.payroll') }}" method="post" style="display: inline-block;">
             @csrf
             <div class="col-md-12">
@@ -32,6 +37,8 @@
                 <button style="margin-top: -4px;" class="btn btn-xs btn-success">Run Payroll</button>
             </div>
         </form>
+        @endif
+
     </div>
 
 {{--    <div class="col-md-12">--}}

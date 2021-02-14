@@ -37,6 +37,8 @@
                 </li>
 
 
+                @if (Auth::user()->type == 'admin')
+
                 <li class="nav-item">
                     <a href="{{ route('user.index') }}" class="nav-link">
                         <i class="nav-icon far fa-calendar-alt"></i>
@@ -57,15 +59,6 @@
                 </li>
 
 
-                <li class="nav-item">
-                    <a href="{{ route('hr.index') }}" class="nav-link">
-                        <i class="nav-icon far fa-calendar-alt"></i>
-                        <p>
-                            Payroll
-                        </p>
-                    </a>
-                </li>
-
 
 
                 <li class="nav-item">
@@ -76,6 +69,18 @@
                         </p>
                     </a>
                 </li>
+
+                @endif
+
+                <li class="nav-item">
+                    <a href="{{ route('hr.index') }}" class="nav-link">
+                        <i class="nav-icon far fa-calendar-alt"></i>
+                        <p>
+                            Payroll
+                        </p>
+                    </a>
+                </li>
+
 
 
 

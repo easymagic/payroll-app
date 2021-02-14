@@ -2,17 +2,24 @@
 
 namespace App\Models;
 
+use App\Policies\OwnershipPolicy;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Payroll extends Model
 {
     use HasFactory;
 
+    use OwnershipPolicy;
+
 
     static function fetch(){
+
+        $type = Auth::user()->type;
+        $userId = Auth::user()->id;
 
         $query = (new self)->newQuery();
 
@@ -26,6 +33,10 @@ class Payroll extends Model
             $query = $query->where('month_year',date('Y-m'));
         }
 
+        if ($type != 'admin'){
+            $query = $query->where('user_id',$userId);
+        }
+
         return $query;
     }
 
@@ -33,12 +44,15 @@ class Payroll extends Model
         return date('Y-m');
     }
 
+
     function scopeThisMonth(Builder $builder){
         $month_year = $this->getThisMonthYear();
+        $builder = self::checkNonAdmin($builder,'user_id');
         return $builder->where('month_year',$month_year);
     }
 
     function scopeTotal(Builder $builder){
+        $builder = self::checkNonAdmin($builder,'user_id');
         return $builder;
     }
 

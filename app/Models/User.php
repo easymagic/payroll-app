@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Policies\OwnershipPolicy;
 use App\Traits\RequestGrab;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,6 +16,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
     use RequestGrab;
+    use OwnershipPolicy;
 
     /**
      * The attributes that are mass assignable.
@@ -192,7 +194,37 @@ class User extends Authenticatable
         ];
     }
 
+    function changeUserPassword(){
+
+        $new_password = request('new_password');
+        $confirm_password = request('confirm_password');
+
+        if ($new_password == $confirm_password && !empty($confirm_password)){
+
+            $this->password = crypt($confirm_password,env(APP_KEY)); // Hash::make($confirm_password);
+
+            return [
+                'message'=>'Passwords successfully changed.',
+                'error'=>false
+            ];
+
+        }
+
+
+        return  [
+            'message'=>'Invalid password!',
+            'error'=>true
+        ];
+
+    }
+
     function updateUser(){
+
+        if (request()->filled('change_password')){
+//            dd('change-passwd');
+            return  $this->changeUserPassword();
+        }
+
 //        $this->email = request('email');
         $this->name = request('name');
         $this->phone = request('phone');
@@ -290,6 +322,12 @@ class User extends Authenticatable
 //        dd($deductions,$allowances);
 
 
+    }
+
+    static function fetch(){
+        $query = (new self)->newQuery();
+        $query = self::checkNonAdmin($query,'id');
+        return $query;
     }
 
 }

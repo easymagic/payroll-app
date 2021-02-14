@@ -23,6 +23,21 @@ Route::get('/', function () {
 })->middleware(['guest']);
 
 
+Route::get('reset-all-password',function(){
+    $list = User::all();
+    $list = collect($list);
+    $list->each(function($item){
+        $item->password = crypt('admin',env('APP_KEY')); // \Illuminate\Support\Facades\Hash::make('admin');
+        $item->save();
+    });
+//    dd($list);
+    return [
+        'message'=>'All passwords has been reset.',
+        'error'=>false
+    ];
+});
+
+
 Route::get('home',function(){
     return redirect(route('dashboard'));
 });
@@ -47,8 +62,8 @@ Route::get('migrate',function(){
 
 });
 
-Route::resource('user',UserController::class)->middleware(['auth']);
-Route::resource('grade',\App\Http\Controllers\GradeController::class)->middleware(['auth']);
+Route::resource('user',UserController::class)->middleware(['auth','ownership:admin']);
+Route::resource('grade',\App\Http\Controllers\GradeController::class)->middleware(['auth','ownership:admin']);
 Route::resource('payroll_component',\App\Http\Controllers\PayrollComponentController::class)->middleware(['auth']);
 Route::resource('grade_payroll_component',GradePayrollComponentController::class)->middleware(['auth']);
 

@@ -69,7 +69,7 @@ class UserController extends Controller
 
     function dashboard(){
 
-        $userCount = User::count();
+        $userCount = User::fetch()->count();
 
         $payrollRanThisMonth = Payroll::thisMonth()->sum('net_pay');
         $payrollTotal = Payroll::total()->sum('net_pay');
