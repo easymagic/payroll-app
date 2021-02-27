@@ -330,4 +330,8 @@ class User extends Authenticatable
         return $query;
     }
 
+    static function fetchV2(){
+        return (new self)->newQuery();
+    }
+
 }
